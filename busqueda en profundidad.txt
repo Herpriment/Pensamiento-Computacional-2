@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+const int N = 5;
+ // Trabajamos con 5 nodos del 0 al 4// Matriz de adyacencia (grafo de 5 nodos)
+int grafo[N][N] = {
+    {0, 1, 1, 0, 0},  // Nodo 0 conectado con 1 y 2
+    {1, 0, 0, 1, 0},  // Nodo 1 conectado con 0 y 3
+    {1, 0, 0, 0, 1},  // Nodo 2 conectado con 0 y 4
+    {0, 1, 0, 0, 0},  // Nodo 3 conectado solo con 1
+    {0, 0, 1, 0, 0}   // Nodo 4 conectado solo con 2
+};
+// Arreglo para saber si ya visitamos un nodo (0 = no visitado, 1 = visitado)
+int visitado[N];
+// Función DFS recursiva
+void dfs(int nodo) {
+    visitado[nodo] = 1;
+    cout << "Visitando nodo " << nodo << endl;
+    for (int vecino = 0; vecino < N; vecino++) {
+        if (grafo[nodo][vecino] == 1 && visitado[vecino] == 0) {
+            dfs(vecino);
+        }
+    }
+}
+int main() {
+    cout << "Recorrido DFS desde el nodo 0:\n";
+    dfs(0);
+    return 0;
+}
